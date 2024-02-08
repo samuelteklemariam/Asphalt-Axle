@@ -56,7 +56,10 @@ if( quantityInCart > 0)
     return <p  key={e.id}>{e.name}</p>; 
     
     })}
-    <div className="cartitems-down">
+
+    {/* Cart Items total */}
+
+    {/* <div className="cartitems-down">
       <div className="cartitems-total">
         <h1>Cart Total</h1>
         <div>
@@ -85,7 +88,7 @@ if( quantityInCart > 0)
           <button>Submit</button>
         </div>
       </div>
-    </div>
+    </div> */}
     
 
     </div>  
