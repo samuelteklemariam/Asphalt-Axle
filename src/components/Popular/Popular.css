@@ -7,16 +7,22 @@
 }
 
 .popular h1{
-    color: #171717;
+    color: #f0a182;
     font-size: 50px;
     font-weight: 600;
+    background-color: #003638;
+    width: 100%;
+    text-align: center;
+    height: 90px;
+    padding-top: 20px;
+    
 }
 
 .popular hr{
     width: 200px;
     height: 6px;
     border-radius: 10px;
-    background: #252525;
+    background: #ff0000;
 }
 
 .popular-item{

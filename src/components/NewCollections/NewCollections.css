@@ -7,16 +7,21 @@
 }
 
 .new-collections h1{
-    color: #171717;
+    color: #000000;
     font-size: 50px;
     font-weight: 600;
+    width: 100%;
+    text-align: center;
+    height: 90px;
+    padding-top: 20px;
+    
 }
 
 .new-collections hr{
     width: 200px;
     height: 6px;
     border-radius: 10px;
-    background: #252525;
+    background: #ff0000;
 }
 
 .collections{
