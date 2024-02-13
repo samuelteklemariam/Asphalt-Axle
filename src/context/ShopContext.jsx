@@ -19,30 +19,35 @@ export const ShopContext = createContext(null);
     }
 
 const ShopContextProvider = (props) => {
-
+ 
     const [cartItems,setCartItems] = useState(getDefaultCart());
 
+    // const addToCart = (itemId) => {
+    //     setCartItems((prev) => {
+    //       // Create a copy of the previous state
+    //       const newCart = { ...prev };
+      
+    //       // If the item is already in the cart, increment the quantity
+    //       if (newCart[itemId]) {
+    //         newCart[itemId] += 1;
+    //       } else {
+    //         // If the item is not in the cart, add it with quantity 1
+    //         newCart[itemId] = 1;
+    //       }
+      
+    //       // Log the updated cart for debugging
+    //       console.log(newCart);
+      
+    //       // Return the updated cart
+    //       return newCart;
+    //     });
+    //   };
+      
     const addToCart = (itemId) => {
-        setCartItems((prev) => {
-          // Create a copy of the previous state
-          const newCart = { ...prev };
-      
-          // If the item is already in the cart, increment the quantity
-          if (newCart[itemId]) {
-            newCart[itemId] += 1;
-          } else {
-            // If the item is not in the cart, add it with quantity 1
-            newCart[itemId] = 1;
-          }
-      
-          // Log the updated cart for debugging
-          console.log(newCart);
-      
-          // Return the updated cart
-          return newCart;
-        });
-      };
-      
+      setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
+      console.log(cartItems);
+    }
+    
 
     //remove from cart
     const removeFromCart = (itemId) =>{
@@ -55,7 +60,9 @@ const ShopContextProvider = (props) => {
       for(const item in cartItems)
       {
         let itemInfo = all_product.find((product)=>product.id===Number(item))
-        totalAmount += itemInfo.new_price * cartItems[item];
+        if (itemInfo && itemInfo.new_price){
+          totalAmount += itemInfo.new_price * cartItems[item];
+        }
       }
       return totalAmount;
     }
