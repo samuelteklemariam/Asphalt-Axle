@@ -1,5 +1,5 @@
-import React, {createContext, useState} from "react";
-import all_product from '../components/Assets/all_product'
+import React, {createContext, useEffect, useState} from "react";
+// import all_product from '../components/Assets/all_product'
 
 export const ShopContext = createContext(null);
 
@@ -10,42 +10,42 @@ export const ShopContext = createContext(null);
 
     const getDefaultCart = ()=>{
         let cart = {};
-       
-        for (let index = 0; index < all_product.length+1; index++) {
-            cart[index] = 0;
-            
-        }
+      
+        for (let index = 0; index < 300+1; index++) {
+          cart[index] = 0;
+          
+      }
         return cart;
     }
 
 const ShopContextProvider = (props) => {
+
+    const [all_product,setAll_Product] = useState([]);
  
     const [cartItems,setCartItems] = useState(getDefaultCart());
 
-    // const addToCart = (itemId) => {
-    //     setCartItems((prev) => {
-    //       // Create a copy of the previous state
-    //       const newCart = { ...prev };
-      
-    //       // If the item is already in the cart, increment the quantity
-    //       if (newCart[itemId]) {
-    //         newCart[itemId] += 1;
-    //       } else {
-    //         // If the item is not in the cart, add it with quantity 1
-    //         newCart[itemId] = 1;
-    //       }
-      
-    //       // Log the updated cart for debugging
-    //       console.log(newCart);
-      
-    //       // Return the updated cart
-    //       return newCart;
-    //     });
-    //   };
+    useEffect(()=>{
+      fetch('http://localhost:4000/allproducts')
+      .then((response)=>response.json())
+      .then((data)=>setAll_Product(data))
+    },[])
+
       
     const addToCart = (itemId) => {
       setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-      console.log(cartItems);
+    if(localStorage.getItem('auth-token')){
+      fetch('http://localhost:4000/addtocart',{
+        method:'POST',
+        headers:{
+          Accept:'application/form-data',
+          'auth-token':`${localStorage.getItem('auth-token')}`,
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({"itemId":itemId}), 
+      })
+      .then((response)=>response.json())
+      .then((data)=>console.log(data));
+    }
     }
     
 
