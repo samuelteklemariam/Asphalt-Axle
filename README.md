@@ -12,6 +12,7 @@ After creating a user account, they can add items to their cart and proceed to c
 
 Tech stack used:
 - React js
+- Java Script
 - Express
 - Node.js
 - Mongodb
